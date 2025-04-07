@@ -13,8 +13,11 @@ Aplikasi ini dibuat untuk memenuhi tugas Final Project Phase 1. Merupakan sistem
 - [EJS Template Engine](https://ejs.co/)
 - [PostgreSQL](https://www.postgresql.org/)
 - [dotenv](https://www.npmjs.com/package/dotenv)
-- [bcrypt](https://www.npmjs.com/package/bcrypt)
-- [uuid](https://www.npmjs.com/package/uuid)
+- [bcryptjs](https://www.npmjs.com/package/bcryptjs)
+- [sequelize-cli](https://www.npmjs.com/package/sequelize-cli)
+- [nodemon](https://www.npmjs.com/package/nodemon)
+- [express-validator](https://www.npmjs.com/package/express-validator)
+- [connect-flash](https://www.npmjs.com/package/connect-flash)
 
 ## 🚀 Cara Menjalankan Aplikasi
 
@@ -39,7 +42,7 @@ Aplikasi ini dibuat untuk memenuhi tugas Final Project Phase 1. Merupakan sistem
   
   5. Jalankan server
      ```bash
-     node --watch app.js
+     npm run dev
   
   6. Buka di browser
      ```bash
