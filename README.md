@@ -18,6 +18,7 @@ Aplikasi ini dibuat untuk memenuhi tugas Final Project Phase 1. Merupakan sistem
 - [nodemon](https://www.npmjs.com/package/nodemon)
 - [express-validator](https://www.npmjs.com/package/express-validator)
 - [connect-flash](https://www.npmjs.com/package/connect-flash)
+- [express-session](https://www.npmjs.com/package/express-session)
 
 ## 🚀 Cara Menjalankan Aplikasi
 
