@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Ecommerce</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#userNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="userNavbar">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Category</a>
+                    <ul class="dropdown-menu">
+                        <% categories?.forEach(el => { %>
+                            <li><a class="dropdown-item" href="/category=<%= el.name %>"><%= el.name %></a></li>
+                        <% }) %>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex" action="/" method="get">
+                <input class="form-control me-2" type="text" placeholder="Search" name="search">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>

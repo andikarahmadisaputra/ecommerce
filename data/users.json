@@ -1,0 +1,33 @@
+[
+    {
+      "email": "andi@gmail.com",
+      "password": "password",
+      "status": "active"
+    },
+    {
+      "email": "andika@gmail.com",
+      "password": "password",
+      "status": "active"
+    },
+    {
+      "email": "admin@gmail.com",
+      "password": "password",
+      "status": "active"
+    },
+    {
+      "email": "seller@gmail.com",
+      "password": "password",
+      "status": "active"
+    },
+    {
+      "email": "buyer@gmail.com",
+      "password": "password",
+      "status": "active"
+    },
+    {
+      "email": "suspend@gmail.com",
+      "password": "password",
+      "status": "suspend"
+    }
+]
+  

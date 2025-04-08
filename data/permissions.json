@@ -1,0 +1,29 @@
+[
+    {
+        "name": "product.read"
+    },
+    {
+        "name": "product.create"
+    },
+    {
+        "name": "product.update"
+    },
+    {
+        "name": "product.delete"
+    },
+    {
+        "name": "category.read"
+    },
+    {
+        "name": "category.create"
+    },
+    {
+        "name": "category.update"
+    },
+    {
+        "name": "category.delete"
+    },
+    {
+        "name": "user.status"
+    }
+]

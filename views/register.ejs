@@ -1,0 +1,45 @@
+<%- include('./partials/header', {title: 'Register'}) %>
+
+<div class="container-fluid">
+    <div class="row mt-4">
+        <div class="col-md-12 text-center">
+            <h1>Register</h1>
+        </div>
+    </div>
+
+    <% if (error_msg && error_msg.length > 0) { %>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="alert alert-danger">
+                    <ul>
+                        <% error_msg.forEach(msg => { %>
+                            <li><%= msg %></li>
+                        <% }) %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <% } %>
+    
+    <div class="row mt-4 mb-4">
+        <div class="col-md-12">
+            <form action="/register" method="post">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Email</span>
+                    <input type="email" class="form-control" placeholder="Email" name="email">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Password</span>
+                    <input type="password" class="form-control" placeholder="Password" name="password">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Confirm Password</span>
+                    <input type="password" class="form-control" placeholder="Confirm Password" name="confirmPassword">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('./partials/footer') %>
