@@ -1,0 +1,44 @@
+[
+    {
+        "name": "Headphone Wireless",
+        "description": "Headphone nirkabel dengan fitur noise cancellation dan baterai tahan lama.",
+        "price": 299000,
+        "imgUrl": "https://example.com/images/headphone.jpg",
+        "stock": 20,
+        "UserId": 1
+    },
+    {
+        "name": "Sepatu Lari",
+        "description": "Sepatu lari ringan dan nyaman untuk olahraga harian.",
+        "price": 450000,
+        "imgUrl": "https://example.com/images/sepatu.jpg",
+        "stock": 35,
+        "UserId": 2
+    },
+    {
+        "name": "Smartwatch Seri 5",
+        "description": "Jam tangan pintar dengan fitur kebugaran dan notifikasi pintar.",
+        "price": 1200000,
+        "imgUrl": "https://example.com/images/smartwatch.jpg",
+        "stock": 12,
+        "UserId": 1
+    },
+    {
+        "name": "Kursi Gaming",
+        "description": "Kursi gaming ergonomis dengan sandaran yang bisa disesuaikan.",
+        "price": 1750000,
+        "imgUrl": "https://example.com/images/kursi-gaming.jpg",
+        "stock": 7,
+        "UserId": 3
+    },
+    {
+        "name": "Speaker Bluetooth",
+        "description": "Speaker Bluetooth portabel dengan kualitas suara jernih dan tahan air.",
+        "price": 325000,
+        "imgUrl": "https://example.com/images/speaker.jpg",
+        "stock": 50,
+        "UserId": 2
+    }
+]
+
+  
