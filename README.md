@@ -12,11 +12,9 @@ Aplikasi ini dibuat untuk memenuhi tugas Final Project Phase 1. Merupakan sistem
 - [Sequelize ORM](https://sequelize.org/)
 - [EJS Template Engine](https://ejs.co/)
 - [PostgreSQL](https://www.postgresql.org/)
-- [dotenv](https://www.npmjs.com/package/dotenv)
 - [bcryptjs](https://www.npmjs.com/package/bcryptjs)
 - [sequelize-cli](https://www.npmjs.com/package/sequelize-cli)
 - [nodemon](https://www.npmjs.com/package/nodemon)
-- [express-validator](https://www.npmjs.com/package/express-validator)
 - [connect-flash](https://www.npmjs.com/package/connect-flash)
 - [express-session](https://www.npmjs.com/package/express-session)
 
@@ -31,21 +29,17 @@ Aplikasi ini dibuat untuk memenuhi tugas Final Project Phase 1. Merupakan sistem
      ```bash
      npm install
 
-  3. **Atur environment file**
-     - Salin `.env.example` menjadi `.env`
-     - Isi konfigurasi seperti `DB_USER`, `DB_PASS`, `DB_NAME`, dll.
-
-  4. Setup database
+  3. Setup database
      ```bash
      npx sequelize-cli db:create
      npx sequelize-cli db:migrate
      npx sequelize-cli db:seed:all
   
-  5. Jalankan server
+  4. Jalankan server
      ```bash
      npm run dev
   
-  6. Buka di browser
+  5. Buka di browser
      ```bash
      http://localhost:3000
 
@@ -64,13 +58,11 @@ Aplikasi ini dibuat untuk memenuhi tugas Final Project Phase 1. Merupakan sistem
    ├── controllers/
    ├── data/
    ├── helpers/
-   ├── middlewares/
    ├── migrations/
    ├── models/
    ├── routes/
    ├── seeders/
    ├── views/
-   ├── .env
    ├── .gitignore
    ├── app.js
    ├── package-lock.json
