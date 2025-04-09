@@ -1,6 +1,5 @@
 const express = require('express')
 const session = require('express-session')
-const flash = require('connect-flash')
 const router = require('./routes/index')
 
 const app = express()
@@ -17,12 +16,12 @@ app.use(session({
         sameSite: true
     }
 }))
-app.use(flash())
 
 // Middleware untuk pass flash message ke view
 app.use((req, res, next) => {
-    res.locals.success_msg = req.flash('success')
-    res.locals.error_msg = req.flash('error')
+    res.locals.success_msg = req.session.flash?.success
+    res.locals.error_msg = req.session.flash?.error
+    delete req.session.flash
     next()
 })
 
