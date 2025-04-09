@@ -13,15 +13,15 @@ module.exports = (sequelize, DataTypes) => {
       Role.belongsToMany(models.User, {
         through: 'UserRoles',
         foreignKey: 'RoleId',
-        otherKey: 'UserId'
+        otherKey: 'UserId',
+        as: 'Users'
       })
       Role.belongsToMany(models.Permission, {
         through: 'RolePermissions',
         foreignKey: 'RoleId',
-        otherKey: 'PermissionId'
+        otherKey: 'PermissionId',
+        as: 'Permissions'
       })
-      Role.hasMany(models.UserRole, {foreignKey: 'RoleId'})
-      Role.hasMany(models.RolePermission, {foreignKey: 'RoleId'})
     }
   }
   Role.init({

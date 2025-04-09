@@ -16,7 +16,6 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^3.0.2",
-    "connect-flash": "^0.1.1",
     "csv-express": "^1.2.2",
     "easyinvoice": "^3.0.47",
     "ejs": "^3.1.10",

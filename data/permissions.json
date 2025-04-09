@@ -24,6 +24,39 @@
         "name": "category.delete"
     },
     {
-        "name": "user.status"
+        "name": "user.read"
+    },
+    {
+        "name": "user.create"
+    },
+    {
+        "name": "user.update"
+    },
+    {
+        "name": "user.delete"
+    },
+    {
+        "name": "role.read"
+    },
+    {
+        "name": "role.create"
+    },
+    {
+        "name": "role.update"
+    },
+    {
+        "name": "role.delete"
+    },
+    {
+        "name": "permission.read"
+    },
+    {
+        "name": "permission.create"
+    },
+    {
+        "name": "permission.update"
+    },
+    {
+        "name": "permission.delete"
     }
 ]

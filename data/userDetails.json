@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Andi Moh Apriansyah",
+        "phone": "081234567890",
+        "gender": "Male",
+        "birthDate": "2000-12-12",
+        "UserId": 1
+    },
+    {
+        "name": "Andika Rahmadi Saputra",
+        "phone": "082345234234",
+        "gender": "Male",
+        "birthDate": "2000-10-10",
+        "UserId": 2
+    },
+    {
+        "name": "Admin Ecommerce",
+        "UserId": 3
+    },
+    {
+        "name": "Seller Ecommerce",
+        "UserId": 4
+    },
+    {
+        "name": "Buyer Ecommerce",
+        "UserId": 5
+    },
+    {
+        "name": "Buyer Suspend Ecommerce",
+        "UserId": 6
+    }
+]

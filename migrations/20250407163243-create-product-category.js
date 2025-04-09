@@ -3,14 +3,9 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('ProductCategories', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
       ProductId: {
         type: Sequelize.INTEGER,
+        primaryKey: true,
         references: {
           model: 'Products',
           key: 'id'
@@ -20,6 +15,7 @@ module.exports = {
       },
       CategoryId: {
         type: Sequelize.INTEGER,
+        primaryKey: true,
         references: {
           model: 'Categories',
           key: 'id'

@@ -1,24 +1,23 @@
-function isAuth() {
-    return function (req, res, next) {
-        if (!req.session.user) {
-            req.flash('error', 'Unauthorized access');
-            return res.redirect('/');
-        }
-        next();
+function isAuth(req, res, next) {
+    if (!req.session.user) {
+        req.session.flash = {error: ['Unauthorized access']}
+        return res.redirect('/');
     }
+    next();
 }
 
 function isAdmin(req, res, next) {
-    if (req.session.user.role !== 'admin') {
-        req.flash('error', 'Unauthorized access');
+    console.log(req.session.user)
+    if (!req.session.user.roles.includes('Admin')) {
+        req.session.flash = {error: ['Unauthorized access']}
         return res.redirect('/');
     }
     next();
 }
 
 function isSeller(req, res, next) {
-    if (req.session.user.role !== 'seller') {
-        req.flash('error', 'Unauthorized access');
+    if (!req.session.user.roles.includes('Seller')) {
+        req.session.flash = {error: ['Unauthorized access']}
         return res.redirect('/');
     }
     next();
@@ -29,12 +28,12 @@ function checkPermission(permission) {
         const user = req.session.user
     
         if (!req.session.user || !req.session.user.permissions) {
-            req.flash('error', 'Unauthorized access');
+            req.session.flash = {error: ['Unauthorized access']}
             return res.redirect('/');
         }
     
         if (!user.permissions.includes(permission)) {
-            req.flash('error', 'Unauthorized access');
+            req.session.flash = {error: ['Unauthorized access']}
             return res.redirect('/');
         }
         next()
