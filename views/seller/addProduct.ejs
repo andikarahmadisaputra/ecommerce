@@ -1,14 +1,12 @@
 <!-- views/seller/addProduct.ejs -->
 <%- include('../partials/header', {title: 'Add Product'}) %>
 <%- include('./navbar') %>
-
 <div class="container-fluid">
     <div class="row mt-4">
         <div class="col-md-12">
             <h1>Add Product</h1>
         </div>
     </div>
-
     <% if (error_msg && error_msg.length > 0) { %>
         <div class="row mt-4">
             <div class="col-md-12">
@@ -22,7 +20,6 @@
             </div>
         </div>
     <% } %>
-
     <div class="row mt-4 mb-4">
         <div class="col-md-12">
             <form action="/seller/add" method="post">
@@ -32,11 +29,11 @@
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text">Price</span>
-                    <input type="number" class="form-control" name="price" required>
+                    <input type="number" class="form-control" name="price" min="0" required>
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text">Stock</span>
-                    <input type="number" class="form-control" name="stock" required>
+                    <input type="number" class="form-control" name="stock" min="0" required>
                 </div>
                 <div class="mb-3">
                     <label>Categories</label>
@@ -52,5 +49,4 @@
         </div>
     </div>
 </div>
-
 <%- include('../partials/footer') %>

@@ -4,11 +4,11 @@ const { isSeller } = require('../helpers/helper');
 
 const router = express.Router();
 
-router.get('/', isSeller, SellerController.getHome);                // Show seller's product list
-router.get('/add', isSeller, SellerController.getAddProduct);       // Show add product form
-router.post('/add', isSeller, SellerController.postAddProduct);     // Handle add product
-router.get('/edit/:id', isSeller, SellerController.getEditProduct); // Show edit product form
-router.post('/edit/:id', isSeller, SellerController.postEditProduct); // Handle edit product
-router.get('/delete/:id', isSeller, SellerController.getDeleteProduct); // Handle delete product
+router.get('/', isSeller, SellerController.getHome);                
+router.get('/add', isSeller, SellerController.getAddProduct);       
+router.post('/add', isSeller, SellerController.postAddProduct);     
+router.get('/edit/:id', isSeller, SellerController.getEditProduct); 
+router.post('/edit/:id', isSeller, SellerController.postEditProduct); 
+router.get('/delete/:id', isSeller, SellerController.getDeleteProduct); 
 
 module.exports = router;

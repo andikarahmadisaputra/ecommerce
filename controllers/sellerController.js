@@ -26,28 +26,33 @@ class SellerController {
     }
 
     static async postAddProduct(req, res) {
-        try {
-            const { name, price, stock, categoryIds } = req.body;
-            const product = await Product.create({
-                name,
-                price,
-                stock,
-                UserId: req.session.user.id
-            });
-            if (categoryIds) {
-                const productCategories = categoryIds.map(id => ({
-                    ProductId: product.id,
-                    CategoryId: id
-                }));
-                await ProductCategory.bulkCreate(productCategories);
-            }
-            req.session.flash = { success: 'Product added successfully!' };
-            res.redirect('/seller');
-        } catch (error) {
-            req.session.flash = { error: [error.message] };
-            res.redirect('/seller/add');
+    try {
+        const { name, price, stock, categoryIds } = req.body;
+        console.log('req.body:', req.body); // Debug
+        const product = await Product.create({
+            name,
+            price: Number(price) || 0, 
+            stock: Number(stock) || 0, 
+            UserId: req.session.user.id
+        });
+        if (categoryIds) {
+            const productCategories = categoryIds.map(id => ({
+                ProductId: product.id,
+                CategoryId: id
+            }));
+            await ProductCategory.bulkCreate(productCategories);
         }
+        req.session.flash = { success: 'Product added successfully!' };
+        res.redirect('/seller');
+    } catch (error) {
+        if (error.name === 'SequelizeValidationError') {
+            req.session.flash = { error: error.errors.map(err => err.message) };
+        } else {
+            req.session.flash = { error: [error.message] };
+        }
+        res.redirect('/seller/add');
     }
+}
 
     static async getEditProduct(req, res) {
         try {
