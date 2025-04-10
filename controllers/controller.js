@@ -103,7 +103,7 @@ class Controller {
                 return res.redirect('/login')
             }
 
-            req.session.user = {
+            req.session.user = { //ngambil untuk id email 
                 id: user.id,
                 email: user.email,
                 roles: user.Roles?.flatMap(el => el.name || []),

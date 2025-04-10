@@ -1,0 +1,55 @@
+<%- include('../partials/header', {title: 'Edit Product'}) %>
+<%- include('../partials/navbar', {categories}) %>
+
+<div class="container-fluid">
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h1>Edit Product</h1>
+        </div>
+    </div>
+
+    <% if (error_msg && error_msg.length > 0) { %>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="alert alert-danger">
+                    <ul>
+                        <% error_msg.forEach(msg => { %>
+                            <li><%= msg %></li>
+                        <% }) %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <% } %>
+
+    <div class="row mt-4 mb-4">
+        <div class="col-md-12">
+            <form action="/seller/edit/<%= product.id %>" method="post">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Name</span>
+                    <input type="text" class="form-control" name="name" value="<%= product.name %>" required>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Price</span>
+                    <input type="number" class="form-control" name="price" value="<%= product.price %>" required>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Stock</span>
+                    <input type="number" class="form-control" name="stock" value="<%= product.stock %>" required>
+                </div>
+                <div class="mb-3">
+                    <label>Categories</label>
+                    <% categories.forEach(cat => { %>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="categoryIds" value="<%= cat.id %>" <%= product.Categories.some(c => c.id === cat.id) ? 'checked' : '' %>>
+                            <label class="form-check-label"><%= cat.name %></label>
+                        </div>
+                    <% }) %>
+                </div>
+                <button type="submit" class="btn btn-primary">Update Product</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>
