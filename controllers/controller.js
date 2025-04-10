@@ -40,7 +40,6 @@ class Controller {
 
             res.render('home', {categories, products, formatRupiah})
         } catch (error) {
-            console.log(error)
             res.send(error)
         }
     }
@@ -205,7 +204,6 @@ class Controller {
             req.session.flash = {success: `${product.name} successfully added to cart`}
             res.redirect('/')
         } catch (error) {
-            console.log(error)
             res.send(error)
         }
     }
@@ -215,10 +213,8 @@ class Controller {
             const categories = await Category.findAllCategory()
             const cart = req.session.cart || []
 
-            console.log(cart)
             res.render('cart', {cart, categories})
         } catch (error) {
-            console.log(error)
             res.send(error)
         }
     }
