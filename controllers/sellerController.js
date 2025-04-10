@@ -1,4 +1,5 @@
-const { Product, Category, ProductCategory } = require('../models')
+// controllers/sellerController.js
+const { Product, Category, ProductCategory } = require('../models');
 
 class SellerController {
     static async getHome(req, res) {
@@ -7,26 +8,26 @@ class SellerController {
                 where: { UserId: req.session.user.id },
                 include: Category
             });
-            res.render('seller/home', { products })
+            res.render('seller/home', { products });
         } catch (error) {
-            req.session.flash = { error: [error.message] }
+            req.session.flash = { error: [error.message] };
             res.redirect('/');
         }
     }
 
     static async getAddProduct(req, res) {
         try {
-            const categories = await Category.findAll()
-            res.render('seller/addProduct', { categories })
+            const categories = await Category.findAll();
+            res.render('seller/addProduct', { categories });
         } catch (error) {
-            req.session.flash = { error: [error.message] }
+            req.session.flash = { error: [error.message] };
             res.redirect('/seller');
         }
     }
 
     static async postAddProduct(req, res) {
         try {
-            const { name, price, stock, categoryIds } = req.body
+            const { name, price, stock, categoryIds } = req.body;
             const product = await Product.create({
                 name,
                 price,
@@ -38,13 +39,13 @@ class SellerController {
                     ProductId: product.id,
                     CategoryId: id
                 }));
-                await ProductCategory.bulkCreate(productCategories)
+                await ProductCategory.bulkCreate(productCategories);
             }
-            req.session.flash = { success: 'Product added successfully!' }
-            res.redirect('/seller')
+            req.session.flash = { success: 'Product added successfully!' };
+            res.redirect('/seller');
         } catch (error) {
-            req.session.flash = { error: [error.message] }
-            res.redirect('/seller/add')
+            req.session.flash = { error: [error.message] };
+            res.redirect('/seller/add');
         }
     }
 
@@ -57,51 +58,51 @@ class SellerController {
             if (!product || product.UserId !== req.session.user.id) {
                 throw new Error('Product not found');
             }
-            res.render('seller/editProduct', { product, categories })
+            res.render('seller/editProduct', { product, categories });
         } catch (error) {
-            req.session.flash = { error: [error.message] }
+            req.session.flash = { error: [error.message] };
             res.redirect('/seller');
         }
     }
 
     static async postEditProduct(req, res) {
         try {
-            const { name, price, stock, categoryIds } = req.body
-            const product = await Product.findByPk(req.params.id)
+            const { name, price, stock, categoryIds } = req.body;
+            const product = await Product.findByPk(req.params.id);
             if (!product || product.UserId !== req.session.user.id) {
-                throw new Error('Product not found')
+                throw new Error('Product not found');
             }
-            await product.update({ name, price, stock })
-            await ProductCategory.destroy({ where: { ProductId: product.id } })
+            await product.update({ name, price, stock });
+            await ProductCategory.destroy({ where: { ProductId: product.id } });
             if (categoryIds) {
                 const productCategories = categoryIds.map(id => ({
                     ProductId: product.id,
                     CategoryId: id
                 }));
-                await ProductCategory.bulkCreate(productCategories)
+                await ProductCategory.bulkCreate(productCategories);
             }
-            req.session.flash = { success: 'Product updated successfully!' }
+            req.session.flash = { success: 'Product updated successfully!' };
             res.redirect('/seller');
         } catch (error) {
-            req.session.flash = { error: [error.message] }
-            res.redirect(`/seller/edit/${req.params.id}`)
+            req.session.flash = { error: [error.message] };
+            res.redirect(`/seller/edit/${req.params.id}`);
         }
     }
 
     static async getDeleteProduct(req, res) {
         try {
-            const product = await Product.findByPk(req.params.id)
+            const product = await Product.findByPk(req.params.id);
             if (!product || product.UserId !== req.session.user.id) {
-                throw new Error('Product not found')
+                throw new Error('Product not found');
             }
             await product.destroy();
-            req.session.flash = { success: 'Product deleted successfully!' }
+            req.session.flash = { success: 'Product deleted successfully!' };
             res.redirect('/seller');
         } catch (error) {
-            req.session.flash = { error: [error.message] }
-            res.redirect('/seller')
+            req.session.flash = { error: [error.message] };
+            res.redirect('/seller');
         }
     }
 }
 
-module.exports = SellerController
+module.exports = SellerController;

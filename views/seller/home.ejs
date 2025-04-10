@@ -1,6 +1,6 @@
+<!-- views/seller/home.ejs -->
 <%- include('../partials/header', {title: 'Seller Dashboard'}) %>
-<%- include('../partials/navbar', {categories}) %>
-
+<%- include('./navbar') %>
 <div class="container-fluid">
     <div class="row mt-4">
         <div class="col-md-12">
@@ -8,7 +8,6 @@
             <a href="/seller/add" class="btn btn-success mb-3">Add Product</a>
         </div>
     </div>
-
     <% if (success_msg && success_msg.length > 0) { %>
         <div class="row mt-4">
             <div class="col-md-12">
@@ -16,7 +15,6 @@
             </div>
         </div>
     <% } %>
-
     <% if (error_msg && error_msg.length > 0) { %>
         <div class="row mt-4">
             <div class="col-md-12">
@@ -30,7 +28,6 @@
             </div>
         </div>
     <% } %>
-
     <div class="row mt-4">
         <div class="col-md-12">
             <table class="table table-striped">
@@ -49,9 +46,9 @@
                         <tr>
                             <td><%= el.id %></td>
                             <td><%= el.name %></td>
-                            <td><%= el.price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR') %></td>
+                            <td><%= el.price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR'}) %></td>
                             <td><%= el.stock %></td>
-                            <td><%= el.Categories.map(c => c.name).join(', ') %></td>
+                            <td><%= el.Categories ? el.Categories.map(c => c.name).join(', ') : '' %></td>
                             <td>
                                 <a href="/seller/edit/<%= el.id %>" class="btn btn-primary btn-sm">Edit</a>
                                 <a href="/seller/delete/<%= el.id %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
@@ -63,5 +60,4 @@
         </div>
     </div>
 </div>
-
 <%- include('../partials/footer') %>
