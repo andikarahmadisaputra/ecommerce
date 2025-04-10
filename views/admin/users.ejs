@@ -5,8 +5,11 @@
         <div class="col-md-2">
             <%- include('./navbar') %>
         </div>
-        <div class="col-md-10">
-            <h1>Manage User</h1>
+        <div class="col-md-10 mt-4">
+            <div class="clearfix">
+                <h1 class="float-start">Manage User</h1>
+                <a href="/admin/users/export" target="_blank" class="btn btn-outline-primary float-end">Export CSV</a>
+            </div>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -22,10 +25,20 @@
                     <% users.forEach(el => { %>
                         <tr>
                             <td><%= el.id %></td>
-                            <td><%= el.UserDetail.name %></td>
+                            <td><%= el.UserDetail ? el.UserDetail.name : '-' %></td>
                             <td><%= el.email %></td>
                             <td><%= el.Roles.map(r => r.name).join(', ') %></td>
                             <td class="<%= el.status === 'suspend' ? 'text-danger' : 'text-success' %>"><%= el.status %></td>
+                            <td>
+                                <div class="btn-group">
+                                    <% if (el.status === 'active') { %>
+                                        <a href="/admin/users/<%= el.id %>/suspend" class="btn btn-outline-danger">Suspend</a>
+                                    <% } else { %>
+                                        <a href="/admin/users/<%= el.id %>/active" class="btn btn-outline-success">Activate</a>
+                                    <% } %>
+                                    <a href="/admin/users/<%= el.id %>/detail" class="btn btn-outline-secondary">Detail</a>
+                                </div>
+                            </td>
                         </tr>
                     <% }) %>
                 </tbody>

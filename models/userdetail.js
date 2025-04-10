@@ -1,4 +1,5 @@
 'use strict';
+const {formatDate} = require('../helpers/helper')
 const {
   Model
 } = require('sequelize');
@@ -11,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       UserDetail.belongsTo(models.User, {foreignKey: 'UserId'})
+    }
+
+    get formatBirthDate() {
+      return this.birthDate ? formatDate(this.birthDate) : null
     }
   }
   UserDetail.init({

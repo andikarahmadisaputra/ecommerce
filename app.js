@@ -22,6 +22,7 @@ app.use((req, res, next) => {
     res.locals.success_msg = req.session.flash?.success
     res.locals.error_msg = req.session.flash?.error
     delete req.session.flash
+    res.locals.user = req.session.user
     next()
 })
 

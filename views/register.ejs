@@ -1,4 +1,5 @@
 <%- include('./partials/header', {title: 'Register'}) %>
+<%- include('./partials/navbar', {categories}) %>
 
 <div class="container-fluid">
     <div class="row mt-4">
@@ -22,7 +23,7 @@
     <% } %>
     
     <div class="row mt-4 mb-4">
-        <div class="col-md-12">
+        <div class="col-md-6 mx-auto text-center">
             <form action="/register" method="post">
                 <div class="input-group mb-3">
                     <span class="input-group-text">Email</span>

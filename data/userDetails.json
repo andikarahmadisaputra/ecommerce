@@ -15,18 +15,37 @@
     },
     {
         "name": "Admin Ecommerce",
+        "phone": "082345234234",
+        "gender": "Male",
+        "birthDate": "2000-10-10",
         "UserId": 3
     },
     {
         "name": "Seller Ecommerce",
+        "phone": "082345234234",
+        "gender": "Male",
+        "birthDate": "2000-10-10",
         "UserId": 4
     },
     {
-        "name": "Buyer Ecommerce",
+        "name": "Seller Ecommerce",
+        "phone": "082345234234",
+        "gender": "Male",
+        "birthDate": "2000-10-10",
         "UserId": 5
     },
     {
-        "name": "Buyer Suspend Ecommerce",
+        "name": "Buyer Ecommerce",
+        "phone": "082345234234",
+        "gender": "Male",
+        "birthDate": "2000-10-10",
         "UserId": 6
+    },
+    {
+        "name": "Buyer Suspend Ecommerce",
+        "phone": "082345234234",
+        "gender": "Male",
+        "birthDate": "2000-10-10",
+        "UserId": 7
     }
 ]

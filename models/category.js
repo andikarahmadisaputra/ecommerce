@@ -1,4 +1,5 @@
 'use strict';
+const {Op} = require('sequelize')
 const {
   Model
 } = require('sequelize');
@@ -15,6 +16,25 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'CategoryId',
         otherKey: 'ProductId'
       })
+    }
+
+    static async findAllCategory(name) {
+      try {
+        let options = {}
+        if (name) {
+          options.where = {
+            name: {
+              [Op.iLike]: `%${name}%`
+            }
+          }
+        }
+
+        const data = await Category.findAll(options)
+
+        return data
+      } catch (error) {
+        throw error
+      }
     }
   }
   Category.init({

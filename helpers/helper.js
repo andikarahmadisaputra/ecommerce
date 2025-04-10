@@ -6,8 +6,15 @@ function isAuth(req, res, next) {
     next();
 }
 
+function isNotAuth(req, res, next) {
+    if (req.session.user) {
+        req.session.flash = {error: ['You are already logged in. Please log out first to switch accounts.']}
+        return res.redirect('/');
+    }
+    next();
+}
+
 function isAdmin(req, res, next) {
-    console.log(req.session.user)
     if (!req.session.user.roles.includes('Admin')) {
         req.session.flash = {error: ['Unauthorized access']}
         return res.redirect('/');
@@ -40,4 +47,19 @@ function checkPermission(permission) {
     }
 }
 
-module.exports = {isAuth, isAdmin, isSeller, checkPermission}
+function formatRupiah(price) {
+    return new Intl.NumberFormat('id-ID', {
+        types: 'currency',
+        currency: 'IDR'
+    }).format(price)
+}
+
+function formatDate(date) {
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+
+    return `${year}-${month}-${day}`
+}
+
+module.exports = {isAuth, isNotAuth, isAdmin, isSeller, checkPermission, formatRupiah, formatDate}
