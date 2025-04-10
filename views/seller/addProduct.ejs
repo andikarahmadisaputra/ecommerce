@@ -22,7 +22,7 @@
     <% } %>
     <div class="row mt-4 mb-4">
         <div class="col-md-12">
-            <form action="/seller/add" method="post">
+            <form action="/seller/add" method="post" enctype="multipart/form-data">
                 <div class="input-group mb-3">
                     <span class="input-group-text">Name</span>
                     <input type="text" class="form-control" name="name" required>
@@ -34,6 +34,10 @@
                 <div class="input-group mb-3">
                     <span class="input-group-text">Stock</span>
                     <input type="number" class="form-control" name="stock" min="0" required>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Image</span>
+                    <input type="file" class="form-control" name="imgUrl" />
                 </div>
                 <div class="mb-3">
                     <label>Categories</label>

@@ -27,20 +27,29 @@ class SellerController {
     static async postAddProduct(req, res) {
         try {
             const { name, price, stock, categoryIds } = req.body;
-            console.log('req.body:', req.body); // Debug
-            const product = await Product.create({
+            const { file } = req;
+
+            let options = {
                 name,
-                price, // Validasi dihilangkan, langsung pakai nilai dari req.body
-                stock: Number(stock) || 0, 
+                price,
+                stock: Number(stock) || 0,
                 UserId: req.session.user.id
-            });
-            if (categoryIds) {
-                const productCategories = categoryIds.map(id => ({
-                    ProductId: product.id,
-                    CategoryId: id
-                }));
-                await ProductCategory.bulkCreate(productCategories);
             }
+
+            if (file && file.filename) {
+                options.imgUrl = `/uploads/${file.filename}`;
+            }
+
+            const product = await Product.create(options);
+
+            if (categoryIds) {
+                if (Array.isArray(categoryIds)) {
+                    await product.addCategories(categoryIds)
+                } else {
+                    await product.addCategory(categoryIds)
+                }
+            }
+            
             req.session.flash = { success: 'Product added successfully!' };
             res.redirect('/seller');
         } catch (error) {
@@ -71,23 +80,29 @@ class SellerController {
 
     static async postEditProduct(req, res) {
         try {
+            const {id} = req.params;
             const { name, price, stock, categoryIds } = req.body;
-            const product = await Product.findByPk(req.params.id);
+
+            const product = await Product.findByPk(id);
+            
             if (!product || product.UserId !== req.session.user.id) {
                 throw new Error('Product not found');
             }
+
             await product.update({ 
                 name, 
-                price, // Validasi dihilangkan, langsung pakai nilai dari req.body
+                price,
                 stock 
             });
+
             await ProductCategory.destroy({ where: { ProductId: product.id } });
+
             if (categoryIds) {
-                const productCategories = categoryIds.map(id => ({
-                    ProductId: product.id,
-                    CategoryId: id
-                }));
-                await ProductCategory.bulkCreate(productCategories);
+                if (Array.isArray(categoryIds)) {
+                    await product.addCategories(categoryIds)
+                } else {
+                    await product.addCategory(categoryIds)
+                }
             }
             req.session.flash = { success: 'Product updated successfully!' };
             res.redirect('/seller');

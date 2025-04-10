@@ -2,7 +2,6 @@
 const express = require('express');
 const session = require('express-session');
 const router = require('./routes/index');
-const sellerRouter = require('./routes/seller');
 
 const app = express();
 const port = 3000;
@@ -26,8 +25,9 @@ app.use((req, res, next) => {
 
 app.use(express.urlencoded({ extended: false }));
 
+app.use('/uploads', express.static('uploads'));
+
 app.use('/', router);
-app.use('/seller', sellerRouter);
 
 app.listen(port, () => {
     console.log(`Ecommerce running on port ${port}`);
