@@ -1,0 +1,39 @@
+<%- include('../partials/header', {title: 'Manage Roles'}) %>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <%- include('./navbar') %>
+        </div>
+        <div class="col-md-10 mt-4">
+            <div class="clearfix">
+                <h1 class="float-start">Manage User</h1>
+                <a href="/admin/roles/export" target="_blank" class="btn btn-outline-primary float-end">Export CSV</a>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% roles.forEach(el => { %>
+                        <tr>
+                            <td><%= el.id %></td>
+                            <td><%= el.name %></td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="/admin/roles/<%= el.id %>/detail" class="btn btn-outline-secondary">Detail</a>
+                                </div>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>

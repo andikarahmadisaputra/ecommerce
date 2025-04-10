@@ -1,0 +1,43 @@
+<%- include('./partials/header', {title: 'Ecommerce'}) %>
+<%- include('./partials/navbar', {categories}) %>
+
+<div class="container mt-4">
+    <h3>Cart</h3>
+    <table class="table table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Qty</th>
+          <th>Subtotal</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (cart.length > 0) { %>
+            <% cart.forEach(el => { %>
+                <tr>
+                    <td><%= el.name %></td>
+                    <td>Rp <%= el.price.toLocaleString() %></td>
+                    <td>
+                        <a href="/cart/<%= el.id %>/decrease" class="btn btn-sm btn-outline-secondary">-</a>
+                        <%= el.qty %>
+                        <a href="/cart/<%= el.id %>/increase" class="btn btn-sm btn-outline-secondary">+</a>
+                    </td>
+                    <td>Rp <%= el.subtotal.toLocaleString() %></td>
+                    <td>
+                        <a href="/cart/<%= el.id %>/increase" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            <% }) %>
+        <% } else { %>
+            <tr>
+                <td colspan="5" class="text-center">Cart is empty</td>
+            </tr>
+        <% } %>
+      </tbody>
+    </table>
+</div>
+  
+
+<%- include('./partials/footer') %>

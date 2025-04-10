@@ -5,20 +5,56 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="userNavbar">
+
             <ul class="navbar-nav me-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Category</a>
                     <ul class="dropdown-menu">
                         <% categories?.forEach(el => { %>
-                            <li><a class="dropdown-item" href="/category=<%= el.name %>"><%= el.name %></a></li>
+                            <li><a class="dropdown-item" href="/?category=<%= el.id %>"><%= el.name %></a></li>
                         <% }) %>
                     </ul>
                 </li>
             </ul>
-            <form class="d-flex" action="/" method="get">
-                <input class="form-control me-2" type="text" placeholder="Search" name="search">
-                <button class="btn btn-primary" type="submit">Search</button>
+
+            <form class="d-flex mx-auto my-2" action="/" method="get" style="max-width: 500px; width: 100%;">
+                <input class="form-control me-2" type="search" name="search" placeholder="Cari produk..." aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
+
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item me-3">
+                    <a class="nav-link position-relative" href="/cart">
+                    <i class="bi bi-cart fs-4"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        3
+                        <span class="visually-hidden">items in cart</span>
+                    </span>
+                    </a>
+                </li>
+                <% if (user) { %>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle fs-4"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        </ul>
+                    </li>
+                <% } else { %>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle fs-4"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="/login">Login</a></li>
+                            <li><a class="dropdown-item" href="/register">Register</a></li>
+                        </ul>
+                    </li>
+                <% } %>
+            </ul>
+
         </div>
     </div>
 </nav>

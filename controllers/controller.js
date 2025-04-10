@@ -1,12 +1,44 @@
-const {User, Category, Role, Permission} = require('../models/index')
+const {Category, Permission, Product, Role, User, UserDetail} = require('../models/index')
+const {formatRupiah} = require('../helpers/helper')
 const bcrypt = require('bcryptjs')
+const {Op} = require('sequelize')
 
 class Controller {
     static async home(req, res) {
         try {
-            const categories = await Category.findAll()
+            const {category, search} = req.query
 
-            res.render('home', {categories})
+            const categories = await Category.findAllCategory()
+
+            let options = {
+                include: [{
+                    model: User,
+                    include: {
+                        model: UserDetail
+                    }
+                }]
+            }
+
+            if (category) {
+                options.include.push({
+                    model: Category,
+                    where: {
+                        id: category
+                    }
+                })
+            }
+
+            if (search) {
+                options.where = {
+                    name: {
+                        [Op.iLike]: `%${search}%`
+                    }
+                }
+            }
+
+            const products = await Product.findAll(options)
+
+            res.render('home', {categories, products, formatRupiah})
         } catch (error) {
             res.send(error)
         }
@@ -14,7 +46,9 @@ class Controller {
 
     static async getRegister(req, res) {
         try {
-            res.render('register')
+            const categories = await Category.findAll()
+
+            res.render('register', {categories})
         } catch (error) {
             res.send(error)
         }
@@ -62,7 +96,9 @@ class Controller {
 
     static async getLogin(req, res) {
         try {
-            res.render('login')
+            const categories = await Category.findAll()
+
+            res.render('login', {categories})
         } catch (error) {
             res.send(error)
         }
@@ -109,9 +145,64 @@ class Controller {
                 roles: user.Roles?.flatMap(el => el.name || []),
                 permissions: user.Roles?.flatMap(role => role.Permissions?.map(el => el.name) || [])
             }
-              
+
             req.session.flash = {success: 'Login successful'}
-            res.redirect('/');
+
+            if (req.session.user.roles.includes('Admin')) {
+                res.redirect('/admin')
+            } else if (req.session.user.roles.includes('Seller')) {
+                res.redirect('/seller')
+            } else {
+                res.redirect('/');
+            }
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
+    static async getLogout(req, res) {
+        try {
+            delete req.session.user
+            req.session.flash = {success: 'Logout successful'}
+            res.redirect('/login')
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
+    static async addToCart(req, res) {
+        try {
+            const {id} = req.params
+
+            const product = await Product.findByPk(id)
+
+            if (!product) {
+                req.session.flash = {error: ['Product not found!']}
+                return res.redirect('/')
+            }
+
+            if (!req.session.cart) req.session.cart = []
+
+            const cart = req.session.cart
+            const index = cart.findIndex(i => i.id == id)
+
+            if (index !== -1) {
+                cart[index].qty += 1
+                cart[index].subtotal = cart[index].qty * cart[index].price
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    qty: 1,
+                    subtotal: product.price
+                })
+            }
+
+            req.session.cart = cart
+
+            req.session.flash = {success: `${product.name} successfully added to cart`}
+            res.redirect('/')
         } catch (error) {
             res.send(error)
         }
@@ -119,7 +210,10 @@ class Controller {
 
     static async getCart(req, res) {
         try {
-            
+            const categories = await Category.findAllCategory()
+            const cart = req.session.cart || []
+
+            res.render('cart', {cart, categories})
         } catch (error) {
             res.send(error)
         }
