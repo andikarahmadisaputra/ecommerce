@@ -20,6 +20,11 @@
       "status": "active"
     },
     {
+      "email": "seller2@gmail.com",
+      "password": "password",
+      "status": "active"
+    },
+    {
       "email": "buyer@gmail.com",
       "password": "password",
       "status": "active"

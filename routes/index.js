@@ -2,19 +2,18 @@ const router = require('express').Router()
 const routerSeller = require('./seller')
 const routerAdmin = require('./admin')
 const Controller = require('../controllers/controller')
-const {isAuth, isAdmin, isSeller} = require('../helpers/helper')
+const {isAuth, isNotAuth, isAdmin, isSeller} = require('../helpers/helper')
 
 router.get('/', Controller.home)
+router.get('/add-to-cart/:id', Controller.addToCart)
+router.get('/cart', Controller.getCart)
 
 // Auth
-router.get('/register', Controller.getRegister)
-router.post('/register', Controller.postRegister)
-router.get('/login', Controller.getLogin)
-router.post('/login', Controller.postLogin)
-router.get('/logout', isAuth, (req, res) => {
-    delete req.session.user
-    res.redirect('/login')
-})
+router.get('/register', isNotAuth, Controller.getRegister)
+router.post('/register', isNotAuth, Controller.postRegister)
+router.get('/login', isNotAuth, Controller.getLogin)
+router.post('/login', isNotAuth, Controller.postLogin)
+router.get('/logout', isAuth, Controller.getLogout)
 
 router.get('/favicon.ico', (req, res) => res.status(204).end())
 
@@ -33,6 +32,5 @@ router.use('/admin', isAdmin, routerAdmin)
 router.use('/seller', isSeller, routerSeller)
 
 router.get('/profile', Controller.getProfile)
-router.get('/cart', Controller.getCart)
 
 module.exports = router

@@ -1,0 +1,100 @@
+<%- include('../partials/header', {title: 'Manage Roles'}) %>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <%- include('./navbar') %>
+        </div>
+        <div class="col-md-10 mt-4">
+            <div class="clearfix">
+                <div class="float-start">
+                    <h3><%= role.name %></h3>
+                </div>
+                <% if (role.Permissions) { %>
+                    <a href="/admin/roles/<%= user.id %>/edit" class="btn btn-outline-secondary float-end">Edit</a>
+                <% } else { %>
+                    <a href="/admin/roles/<%= user.id %>/add" class="btn btn-outline-primary float-end">Add</a>
+                <% } %>
+            </div>
+
+            <% if (success_msg && success_msg.length > 0) { %>
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="alert alert-success"><%= success_msg %></div>
+                    </div>
+                </div>
+            <% } %>
+        
+            <% if (error_msg && error_msg.length > 0) { %>
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="alert alert-danger">
+                            <ul>
+                                <% error_msg.forEach(msg => { %>
+                                    <li><%= msg %></li>
+                                <% }) %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+
+            <ul class="nav nav-tabs mt-3" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" data-bs-toggle="tab" href="#user">User</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-bs-toggle="tab" href="#permissions">Permission</a>
+                </li>
+            </ul>
+            
+            <div class="tab-content">
+                <div id="user" class="container tab-pane active"><br>
+                    <% if (role.Users) { %>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% role.Users?.forEach(el => { %>
+                                    <tr>
+                                        <td><%= el.id %></td>
+                                        <td><%= el.UserDetail ? el.UserDetail.name : '-' %></td>
+                                        <td><%= el.email %></td>
+                                        <td><%= el.Roles.map(r => r.name).join(', ') %></td>
+                                        <td class="<%= el.status === 'suspend' ? 'text-danger' : 'text-success' %>"><%= el.status %></td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a href="/admin/roles/<%= el.id %>/user/<%= el.id %>/remove" class="btn btn-outline-danger">Remove</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    <% } %>
+                </div>
+                <div id="permissions" class="container tab-pane fade"><br>
+                    <ul>
+                        <% role.Permissions?.forEach(el => { %>
+                            <li><%= el.name %></li>
+                        <% }) %>
+                    </ul>
+                    <% if (role.Permissions) { %>
+                        <a href="/admin/roles/<%= user.id %>/delete" class="btn btn-danger mt-4">Delete Permissions</a>
+                    <% } %>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>

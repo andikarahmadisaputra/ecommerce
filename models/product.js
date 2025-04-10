@@ -1,4 +1,5 @@
 'use strict';
+const {formatRupiah} = require('../helpers/helper')
 const {
   Model
 } = require('sequelize');
@@ -17,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
         otherKey: 'CategoryId'
       })
       Product.hasMany(models.TransactionDetail, {foreignKey: 'ProductId'})
+    }
+
+    get formatPrice() {
+      return formatRupiah(this.price)
     }
   }
   Product.init({

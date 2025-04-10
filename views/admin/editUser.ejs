@@ -1,0 +1,54 @@
+<%- include('../partials/header', {title: 'Manage User'}) %>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <%- include('./navbar') %>
+        </div>
+        <div class="col-md-10 mt-4">
+            <div class="clearfix">
+                <div class="float-start">
+                    <h3><%= user.UserDetail.name %></h3>
+                    <h5 class="text-secondary"><%= user.Roles?.map(el => el.name).join(', ') %></h5>
+                </div>
+            </div>
+
+            <ul class="nav nav-tabs mt-3" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" data-bs-toggle="tab" href="#about">About</a>
+                </li>
+            </ul>
+            
+            <div class="tab-content">
+                <div id="about" class="container tab-pane active"><br>
+                    <form action="/admin/users/<%= user.id %>/edit" method="post">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Name</span>
+                            <input type="text" class="form-control" placeholder="Name" name="name" value="<%= user.UserDetail.name %>">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Birth date</span>
+                            <input type="date" class="form-control" name="birthdate" value="<%= user.UserDetail.formatBirthDate %>">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Gender</span>
+                            <select name="gender" class="form-select">
+                                <% ['Male' ,'Female'].forEach(el => { %>
+                                    <option value="<%= el %>" <%= user.UserDetail === el ? 'selected' : '' %>><%= el %></option>
+                                <% }) %>
+                            </select>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Phone Number</span>
+                            <input type="text" class="form-control" placeholder="Phone number" name="phone" value="<%= user.UserDetail.phone %>">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <a href="/admin/users/<%= user.id %>/detail" class="btn btn-danger">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>
